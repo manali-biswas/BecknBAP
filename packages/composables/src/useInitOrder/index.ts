@@ -13,6 +13,7 @@ const factoryParams = {
   },
 
   dataHandler: (_, { newResults }) => {
+    console.log("Init: "+JSON.stringify(newResults));
     return newResults;
   },
 

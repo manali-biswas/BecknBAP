@@ -141,6 +141,7 @@ export default {
     const proceedToConfirm = async () => {
       enableLoader.value = true;
       order.value.paymentMethod = paymentMethod.value;
+      console.log(JSON.stringify(order.value.initOrder));
       const params = createConfirmOrderRequest(
         order.value.transactionId,
         order.value.cart,

@@ -14,6 +14,8 @@ export default async function getProduct(context: Context, params, customQuery?:
   };
   if (params.providerId) criteriaData.provider_id = params.providerId;
   if (params.itemContains) criteriaData.search_string = params.itemContains;
+  if (params.provider_name) criteriaData.provider_name=params.provider_name;
+  if(params.category_name) criteriaData.category_name=params.category_name;
 
   const qParams = {
     context: {

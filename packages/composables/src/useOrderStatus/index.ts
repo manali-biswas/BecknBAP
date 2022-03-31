@@ -17,6 +17,7 @@ const factoryParams = {
   },
 
   dataHandler: (_, { newResults }) => {
+    console.log("Status: "+JSON.stringify(newResults));
     return newResults;
   },
 

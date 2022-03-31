@@ -7,7 +7,7 @@
       <div class="position-relative">
         <div class="open-search-input">
           <div
-           :class="{'dropdown-button': true, 'dropdown-disabled': !selectedLocation.latitude || !selectedLocation.longitude }"
+           :class="{'dropdown-button': true}"
            @click="onDropdownHeaderClick">
             <div v-if="selectedSearchByOption === 'search-by-all'">
               All
@@ -18,8 +18,8 @@
             />
             <SfIcon icon="chevron_down" size="xxs" />
           </div>
-          <input class="search-placeholder" v-on:keyup.enter="openSearch" v-model="message" :valid="false" errorMessage="errer" type="text" :placeholder="searchByPlaceholderMapper[selectedSearchByOption]" :disabled="!selectedLocation.latitude || !selectedLocation.longitude" v-e2e="'home-search-input'"/>
-          <SfButton class="button-pos sf-button--pure color-primary" :class="{'is-disabled--button':(!selectedLocation.latitude || !selectedLocation.longitude)}" @click="openSearch" :disabled="!selectedLocation.latitude || !selectedLocation.longitude" v-e2e="'home-search-button'">
+          <input class="search-placeholder" v-on:keyup.enter="openSearch" v-model="message" :valid="false" errorMessage="errer" type="text" :placeholder="searchByPlaceholderMapper[selectedSearchByOption]"  v-e2e="'home-search-input'"/>
+          <SfButton class="button-pos sf-button--pure color-primary"  @click="openSearch"  v-e2e="'home-search-button'">
             <span class="sf-search-bar__icon">
               <SfIcon color="var(--c-text)" size="18px" icon="search" />
             </span>
@@ -89,9 +89,7 @@ export default {
     const selectedSearchByOption = ref('search-by-all');
 
     const onDropdownHeaderClick = () => {
-      if (selectedLocation.value.latitude || selectedLocation.value.longitude) {
-        openSearchByDropdown.value = !openSearchByDropdown.value;
-      }
+      openSearchByDropdown.value=!openSearchByDropdown.value;
     };
 
     const onSelectDropdownItem = (selectedOption) => {

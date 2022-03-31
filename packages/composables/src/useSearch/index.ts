@@ -44,6 +44,7 @@ const factoryParams = {
   },
   init: async (context: Context, { params }) => {
     const searchParams = buildSearchItemsWhere(params.input);
+    console.log(context.$beckn.api);
     const ackResponse: AckResponse = await context.$beckn.api.getProduct(
       searchParams
     );

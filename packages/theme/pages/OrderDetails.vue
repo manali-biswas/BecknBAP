@@ -77,7 +77,7 @@
               </CardContent>
               <CardContent class="flex-space-bw">
                 <div>
-                  {{ order.quote.breakup[0].title }} x
+                  {{ order.quote }} x
                   {{ order.items[0].quantity.count }}
                 </div>
                 <div>
@@ -238,20 +238,9 @@
         <SfAccordion>
           <SfAccordionItem :header="'Payment'">
             <div :key="orderId" v-for="(value, orderId) in order.orderData">
-              <div :key="id" v-for="(breakup, id) in value.quote.breakup">
-                <CardContent class="flex-space-bw">
-                  <div class="address-text">{{ breakup.title }}</div>
-                  <div class="address-text-value">
-                    ₹{{ breakup.price.value }}
-                  </div>
-                </CardContent>
-              </div>
               <div><hr class="sf-divider divider" /></div>
               <CardContent class="flex-space-bw">
                 <div class="address-text">Total</div>
-                <div class="address-text-value">
-                  ₹{{ value.quote.price.value }}
-                </div>
               </CardContent>
               <CardContent class="flex-space-bw">
                 <div class="address-text">Status</div>
@@ -724,6 +713,7 @@ export default {
       const orders = JSON.parse(localStorage.getItem('orderHistory')) ?? [];
 
       order.value = orders.find((ord) => {
+        console.log("Order: "+JSON.stringify(ord));
         return ord.parentOrderId === parentOrderId;
       });
 

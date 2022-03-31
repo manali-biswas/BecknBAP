@@ -15,6 +15,7 @@ const factoryParams = {
   },
 
   dataHandler: (_, { newResults }) => {
+    console.log("Confirm: "+JSON.stringify(newResults));
     return newResults;
   },
 

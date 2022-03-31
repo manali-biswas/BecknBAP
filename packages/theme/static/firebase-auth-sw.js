@@ -31,6 +31,7 @@ const getIdToken = () => {
         // force token refresh as it might be used to sign in server side
         user.getIdToken(true).then(
           (idToken) => {
+            console.log(idToken);
             resolve(idToken);
           },
           () => {

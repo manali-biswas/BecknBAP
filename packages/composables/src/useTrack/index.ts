@@ -18,6 +18,7 @@ const factoryParams = {
   },
 
   dataHandler: (_, { newResults }) => {
+    console.log("Track: "+JSON.stringify(newResults));
     return newResults;
   },
 

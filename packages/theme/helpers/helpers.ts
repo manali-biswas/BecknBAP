@@ -147,7 +147,8 @@ export const createConfirmOrderRequest = (
               initOrderData[bppId][providerId]?.payment?.params?.amount,
             status: 'PAID',
             transaction_id: transactionId
-          }
+          },
+          quote: initOrderData[bppId][providerId]?.quote
         }
       };
       confirmOrderRequest.push(initItems);

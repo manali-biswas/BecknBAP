@@ -8,18 +8,15 @@
         :value="searchKey"
         @input="(value) => (searchKey = value)"
         @keydown.enter="searchHit($event)"
-        :disabled="!selectedLocation.latitude || !selectedLocation.longitude"
       >
         <template #icon>
           <div
             :class="{
-              'dropdown-button': true,
-              'dropdown-disabled':
-                !selectedLocation.latitude || !selectedLocation.longitude,
+              'dropdown-button': true
             }"
             @click="onDropdownHeaderClick"
           >
-            <div v-if="selectedSearchByOption === 'search-by-all'">All</div>
+            <div v-if="selectedSearchByOption === 'search-by-all'">Item</div>
             <SfImage
               v-else
               :src="`/icons/${selectedSearchByOption}.png`"
@@ -225,14 +222,22 @@ export default {
       context.root.$route.params.searchBy || 'search-by-all'
     );
     const searchByMapper = {
-      'search-by-all': 'All',
+      'search-by-all': 'Search by Item',
       'search-by-seller': 'Search by Seller',
       'search-by-category': 'Search by Category',
+      'search-by-item-seller': "Search by item and seller",
+      'search-by-category-seller':"Search by category and seller",
+      'search-by-category-item':"Search by category and item",
+      'search-by-cat-item-sell':"Search by all"
     };
     const searchByPlaceholderMapper = {
       'search-by-all': 'Search for Items',
       'search-by-seller': "Enter Seller's Name",
       'search-by-category': 'Enter Category Name',
+      'search-by-item-seller': "Search by item and seller",
+      'search-by-category-seller':"Search by category and seller",
+      'search-by-category-item':"Search by category and item",
+      'search-by-cat-item-sell':"Search by all"
     };
 
     console.log(cart);
@@ -251,13 +256,14 @@ export default {
       enableLoader.value = true;
       if (noSearchFound.value) noSearchFound.value = false;
       toggleLoadindBar(false);
-
+      var loc=null;
+      console.log(JSON.stringify(selectedLocation));
+      if(selectedLocation?.value?.latitude!==""){
+        loc=selectedLocation?.value?.latitude + ',' + selectedLocation?.value?.longitude;
+      }
       search({
         term: paramValue,
-        locationIs:
-          selectedLocation?.value?.latitude +
-          ',' +
-          selectedLocation?.value?.longitude,
+        locationIs:loc,
         searchBy: selectedSearchByOption.value,
         // eslint-disable-next-line no-unused-vars
       }).then((_) => {
@@ -338,7 +344,7 @@ export default {
     const totalResults = computed(() => {
       let reusltNum = 0;
       for (const bpp of pollResults?.value) {
-        if (bpp.bpp_providers.length !== 0) {
+        if (bpp.bpp_providers && bpp.bpp_providers.length !== 0) {
           for (const provider of bpp.bpp_providers) {
             if (provider.items) {
               reusltNum += provider.items.length;
@@ -416,9 +422,7 @@ export default {
     };
 
     const onDropdownHeaderClick = () => {
-      if (selectedLocation.value.latitude || selectedLocation.value.longitude) {
-        openSearchByDropdown.value = !openSearchByDropdown.value;
-      }
+      openSearchByDropdown.value=!openSearchByDropdown.value;
     };
 
     const onSelectDropdownItem = (selectedOption) => {
