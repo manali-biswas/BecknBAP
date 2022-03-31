@@ -10,7 +10,7 @@
            :class="{'dropdown-button': true}"
            @click="onDropdownHeaderClick">
             <div v-if="selectedSearchByOption === 'search-by-all'">
-              All
+            Item
             </div>
             <SfImage v-else
               :src="`/icons/${selectedSearchByOption}.png`"
@@ -76,14 +76,22 @@ export default {
     const errorMsg = ref(false);
     const openSearchByDropdown = ref(false);
     const searchByMapper = {
-      'search-by-all': 'All',
+      'search-by-all': 'Search by Item',
       'search-by-seller': 'Search by Seller',
-      'search-by-category': 'Search by Category'
+      'search-by-category': 'Search by Category',
+      'search-by-item-seller': "Search by item and seller",
+      'search-by-category-seller':"Search by category and seller",
+      'search-by-category-item':"Search by category and item",
+      'search-by-cat-item-sell':"Search by all"
     };
     const searchByPlaceholderMapper = {
       'search-by-all': 'Search for Items',
-      'search-by-seller': 'Enter Seller\'s Name',
-      'search-by-category': 'Enter Category Name'
+      'search-by-seller': "Enter Seller's Name",
+      'search-by-category': 'Enter Category Name',
+      'search-by-item-seller': "Search by item and seller",
+      'search-by-category-seller':"Search by category and seller",
+      'search-by-category-item':"Search by category and item",
+      'search-by-cat-item-sell':"Search by all"
     };
 
     const selectedSearchByOption = ref('search-by-all');
